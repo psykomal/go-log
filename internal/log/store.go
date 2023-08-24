@@ -36,6 +36,7 @@ func newStore(f *os.File) (*store, error) {
 }
 
 func (s *store) Append(p []byte) (n uint64, pos uint64, err error) {
+	// Returns the number of bytes written and position
 	s.mu.Lock()
 	defer s.mu.Unlock()
 
