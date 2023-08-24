@@ -1,6 +1,7 @@
 # os
 
 os.MkdirTemp
+os.CreateTemp
 os.ReadDir
 os.Stat
 os.Truncate
@@ -69,3 +70,18 @@ sort.Slice(baseOffsets, func(i, j int) bool {
 
 io.Reader
 io.MultiReader
+
+# testing
+
+t.Run
+t.Helper()
+
+# testify
+
+require.Equal
+require.NotEqual
+require.Nil
+require.Error
+require.NoError
+require.True
+require.False
