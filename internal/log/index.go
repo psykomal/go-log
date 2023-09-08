@@ -54,17 +54,18 @@ func (i *index) Read(in int64) (out uint32, pos uint64, err error) {
 	if i.size == 0 {
 		return 0, 0, io.EOF
 	}
+	var indexOff uint32
 	if in == -1 {
-		out = uint32((i.size / entWidth) - 1)
+		indexOff = uint32((i.size / entWidth) - 1)
 	} else {
-		out = uint32(in)
+		indexOff = uint32(in)
 	}
-	pos = uint64(out) * entWidth
-	if i.size < pos+entWidth {
+	indexPos := uint64(indexOff) * entWidth
+	if i.size < indexPos+entWidth {
 		return 0, 0, io.EOF
 	}
-	out = enc.Uint32(i.mmap[pos : pos+offWidth])
-	pos = enc.Uint64(i.mmap[pos+offWidth : pos+entWidth])
+	out = enc.Uint32(i.mmap[indexPos : indexPos+offWidth])
+	pos = enc.Uint64(i.mmap[indexPos+offWidth : indexPos+entWidth])
 	return out, pos, nil
 }
 
